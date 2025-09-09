@@ -23,8 +23,10 @@ struct ContentView: View {
                 ConnectionStatusBar(status: viewModel.connectionStatus, lastUpdated: viewModel.lastUpdated)
                 
                 if watchlistItems.isEmpty {
-                    EmptyWatchlistView {
-                        showingAddPairs = true
+                    EmptyWatchlistView(connectionStatus: viewModel.connectionStatus) {
+                        if viewModel.connectionStatus != .disconnected {
+                            showingAddPairs = true
+                        }
                     }
                 } else {
                     List {
@@ -33,7 +35,9 @@ struct ContentView: View {
                                 item: item,
                                 rate: viewModel.rates[item.pairString],
                                 onTap: {
-                                    selectedItemForDetails = item
+                                    if viewModel.connectionStatus != .disconnected {
+                                        selectedItemForDetails = item
+                                    }
                                 }
                             )
                         }
@@ -51,16 +55,20 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        showingAddPairs = true
+                        if viewModel.connectionStatus != .disconnected {
+                            showingAddPairs = true
+                        }
                     } label: {
                         Image(systemName: "plus")
                     }
-                    .disabled(viewModel.getAvailablePairs(excluding: watchlistItems).isEmpty)
+                    .disabled(viewModel.getAvailablePairs(excluding: watchlistItems).isEmpty || viewModel.connectionStatus == .disconnected)
+                    .foregroundColor((viewModel.getAvailablePairs(excluding: watchlistItems).isEmpty || viewModel.connectionStatus == .disconnected) ? .gray : .accentColor)
                 }
                 
-                ToolbarItem(placement: .navigationBarLeading) {
-                    EditButton()
-                        .disabled(watchlistItems.isEmpty)
+                if !watchlistItems.isEmpty {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        EditButton()
+                    }
                 }
             }
             .onAppear {
@@ -72,8 +80,17 @@ struct ContentView: View {
             .onChange(of: watchlistItems) { _, newItems in
                 viewModel.startStreaming(with: newItems)
             }
+            .onChange(of: viewModel.connectionStatus) { _, newStatus in
+                if newStatus == .disconnected {
+                    showingAddPairs = false
+                    selectedItemForDetails = nil
+                }
+            }
             .sheet(isPresented: $showingAddPairs) {
-                AddPairsView(availablePairs: viewModel.getAvailablePairs(excluding: watchlistItems)) { pairs in
+                AddPairsView(
+                    availablePairs: viewModel.getAvailablePairs(excluding: watchlistItems),
+                    connectionStatus: viewModel.connectionStatus
+                ) { pairs in
                     viewModel.addPairs(pairs, to: watchlistItems, context: modelContext)
                 }
             }

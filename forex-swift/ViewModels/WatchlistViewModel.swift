@@ -14,7 +14,7 @@ import SwiftUI
 final class WatchlistViewModel {
     // MARK: - Published Properties
     var rates: [String: ForexRate] = [:]
-    var connectionStatus: ConnectionStatus = .disconnected
+    var connectionStatus: ConnectionStatus { forexService.connectionStatus }
     var lastUpdated: Date?
     var isLoading = false
     var errorMessage: String?
@@ -32,7 +32,6 @@ final class WatchlistViewModel {
         guard !pairs.isEmpty else { return }
         
         watchedPairs = Set(pairs)
-        connectionStatus = .connecting
         isLoading = true
         errorMessage = nil
         
@@ -53,7 +52,6 @@ final class WatchlistViewModel {
     func stopStreaming() {
         timer?.invalidate()
         timer = nil
-        connectionStatus = .disconnected
         isLoading = false
     }
     
@@ -126,12 +124,6 @@ final class WatchlistViewModel {
     private func fetchAllRates() async {
         guard !watchedPairs.isEmpty else { return }
         
-        await MainActor.run {
-            if connectionStatus == .disconnected {
-                connectionStatus = .connecting
-            }
-        }
-        
         await withTaskGroup(of: Void.self) { group in
             for pair in watchedPairs {
                 group.addTask {
@@ -140,13 +132,12 @@ final class WatchlistViewModel {
             }
         }
         
-        // Update connection status based on results
+        // Update loading state based on results
         await MainActor.run {
             if rates.count > 0 {
                 isLoading = false
                 errorMessage = nil
-            } else if connectionStatus == .connecting {
-                connectionStatus = .disconnected
+            } else {
                 isLoading = false
                 errorMessage = "Unable to fetch forex data"
             }
@@ -166,14 +157,9 @@ final class WatchlistViewModel {
                 } else {
                     lastUpdated = Date() // Fallback to current time
                 }
-                
-                connectionStatus = .connected
             }
         } catch {
             await MainActor.run {
-                if connectionStatus != .connected {
-                    connectionStatus = .disconnected
-                }
                 print("Error fetching rate for \(pair.rawValue): \(error.localizedDescription)")
             }
         }

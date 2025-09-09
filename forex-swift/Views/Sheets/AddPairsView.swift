@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddPairsView: View {
     let availablePairs: [SupportedPair]
+    let connectionStatus: ConnectionStatus
     let onAddPairs: ([SupportedPair]) -> Void
     
     @Environment(\.dismiss) private var dismiss
@@ -77,7 +78,8 @@ struct AddPairsView: View {
                         onAddPairs(Array(selectedPairs))
                         dismiss()
                     }
-                    .disabled(selectedPairs.isEmpty)
+                    .disabled(selectedPairs.isEmpty || connectionStatus == .disconnected)
+                    .foregroundColor((selectedPairs.isEmpty || connectionStatus == .disconnected) ? .gray : .blue)
                 }
             }
         }
@@ -95,6 +97,7 @@ struct AddPairsView: View {
 #Preview {
     AddPairsView(
         availablePairs: [.USDJPY, .EURUSD, .GBPUSD],
+        connectionStatus: .connected,
         onAddPairs: { pairs in
             print("Adding pairs: \(pairs)")
         }

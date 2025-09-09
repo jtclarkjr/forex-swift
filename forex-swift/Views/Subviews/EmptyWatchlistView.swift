@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EmptyWatchlistView: View {
+    let connectionStatus: ConnectionStatus
     let onAddTapped: () -> Void
     
     var body: some View {
@@ -29,7 +30,9 @@ struct EmptyWatchlistView: View {
             }
             
             Button {
-                onAddTapped()
+                if connectionStatus != .disconnected {
+                    onAddTapped()
+                }
             } label: {
                 HStack {
                     Image(systemName: "plus")
@@ -39,16 +42,17 @@ struct EmptyWatchlistView: View {
                 .foregroundColor(.white)
                 .padding(.horizontal, 24)
                 .padding(.vertical, 12)
-                .background(Color.accentColor)
+                .background(connectionStatus == .disconnected ? Color.gray : Color.accentColor)
                 .cornerRadius(10)
             }
+            .disabled(connectionStatus == .disconnected)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 #Preview {
-    EmptyWatchlistView {
+    EmptyWatchlistView(connectionStatus: .connected) {
         print("Add tapped")
     }
 }

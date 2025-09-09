@@ -48,17 +48,62 @@ class ForexService {
     var connectionStatus: ConnectionStatus = .disconnected
     
     private init(baseURL: String? = nil, token: String? = nil, session: URLSession = .shared) {
-        self.baseURL = baseURL ?? ProcessInfo.processInfo.environment["FOREX_BASE_URL"] ?? ""
-        self.token = token ?? ProcessInfo.processInfo.environment["FOREX_API_TOKEN"] ?? ""
+        self.baseURL = baseURL ?? ProcessInfo.processInfo.environment["FOREX_SERVICE_URL"] ?? ""
+        self.token = token ?? ProcessInfo.processInfo.environment["FOREX_SERVICE_TOKEN"] ?? ""
         self.session = session
-        if ProcessInfo.processInfo.environment["FOREX_BASE_URL"] == nil || ProcessInfo.processInfo.environment["FOREX_API_TOKEN"] == nil {
+        
+        if ProcessInfo.processInfo.environment["FOREX_SERVICE_URL"] == nil || ProcessInfo.processInfo.environment["FOREX_SERVICE_TOKEN"] == nil {
             print("⚠️ ForexService: Using fallback BASE_URL or TOKEN. Set these in your environment.")
+        }
+        
+        // Test connection on initialization
+        Task {
+            await testConnection()
+        }
+    }
+    
+    // Test connection to the service
+    private func testConnection() async {
+        guard !baseURL.isEmpty && !token.isEmpty else {
+            connectionStatus = .disconnected
+            return
+        }
+        
+        guard let url = URL(string: "\(baseURL)/rates?pair=EURUSD") else {
+            connectionStatus = .disconnected
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.setValue(token, forHTTPHeaderField: "token")
+        request.timeoutInterval = 5.0 // Shorter timeout for health check
+        
+        do {
+            connectionStatus = .connecting
+            let (_, response) = try await session.data(for: request)
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                switch httpResponse.statusCode {
+                case 200:
+                    connectionStatus = .connected
+                case 401, 403:
+                    connectionStatus = .disconnected
+                default:
+                    connectionStatus = .connected // Service is responding, even if with errors
+                }
+            } else {
+                connectionStatus = .disconnected
+            }
+        } catch {
+            connectionStatus = .disconnected
         }
     }
     
     // Fetch single forex rate
     func fetchForexRate(for pair: SupportedPair) async throws -> ForexRate {
-        guard let url = URL(string: "\(self.baseURL)/rates?pair=\(formatPairForAPI(pair.rawValue))") else {
+        let urlString = "\(self.baseURL)/rates?pair=\(formatPairForAPI(pair.rawValue))"
+        
+        guard let url = URL(string: urlString) else {
             throw ForexServiceError.invalidURL
         }
         
