@@ -53,7 +53,7 @@ class ForexService {
         self.session = session
         
         if ProcessInfo.processInfo.environment["FOREX_SERVICE_URL"] == nil || ProcessInfo.processInfo.environment["FOREX_SERVICE_TOKEN"] == nil {
-            print("⚠️ ForexService: Using fallback BASE_URL or TOKEN. Set these in your environment.")
+            print("ForexService: Using fallback BASE_URL or TOKEN. Set these in your environment.")
         }
         
         // Test connection on initialization
