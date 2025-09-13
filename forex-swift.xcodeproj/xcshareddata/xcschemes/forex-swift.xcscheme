@@ -35,7 +35,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C64FA162E751D4F00751756"
+               BlueprintIdentifier = "8C64FA2F2E751D9500751756"
                BuildableName = "forex-swiftTests.xctest"
                BlueprintName = "forex-swiftTests"
                ReferencedContainer = "container:forex-swift.xcodeproj">
@@ -71,7 +71,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "FOREX_SERVICE_TOKEN"
-            value = ""
+            value = "10dc303535874aeccc86a8251e6992f5"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

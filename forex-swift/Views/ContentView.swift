@@ -18,59 +18,14 @@ struct ContentView: View {
 
     var body: some View {
         NavigationSplitView {
-            VStack(spacing: 0) {
-                // Connection Status Bar
-                ConnectionStatusBar(status: viewModel.connectionStatus, lastUpdated: viewModel.lastUpdated)
-                
-                if watchlistItems.isEmpty {
-                    EmptyWatchlistView(connectionStatus: viewModel.connectionStatus) {
-                        if viewModel.connectionStatus != .disconnected {
-                            showingAddPairs = true
-                        }
-                    }
-                } else {
-                    List {
-                        ForEach(watchlistItems, id: \.id) { item in
-                            WatchlistItemRow(
-                                item: item,
-                                rate: viewModel.rates[item.pairString],
-                                onTap: {
-                                    if viewModel.connectionStatus != .disconnected {
-                                        selectedItemForDetails = item
-                                    }
-                                }
-                            )
-                        }
-                        .onDelete(perform: deleteItems)
-                        .onMove(perform: moveItems)
-                    }
-                    .listStyle(.plain)
-                    .refreshable {
-                        await viewModel.refreshRates()
-                    }
-                }
-            }
-            .navigationTitle("Forex Watchlist")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        if viewModel.connectionStatus != .disconnected {
-                            showingAddPairs = true
-                        }
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                    .disabled(viewModel.getAvailablePairs(excluding: watchlistItems).isEmpty || viewModel.connectionStatus == .disconnected)
-                    .foregroundColor((viewModel.getAvailablePairs(excluding: watchlistItems).isEmpty || viewModel.connectionStatus == .disconnected) ? .gray : .accentColor)
-                }
-                
-                if !watchlistItems.isEmpty {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        EditButton()
-                    }
-                }
-            }
+            WatchlistMainView(
+                watchlistItems: watchlistItems,
+                viewModel: viewModel,
+                showingAddPairs: $showingAddPairs,
+                selectedItemForDetails: $selectedItemForDetails,
+                onDeleteItems: deleteItems,
+                onMoveItems: moveItems
+            )
             .onAppear {
                 viewModel.startStreaming(with: watchlistItems)
             }
@@ -100,7 +55,7 @@ struct ContentView: View {
                 }
             }
         } detail: {
-            Text("Select a currency pair to view details")
+            WatchlistDetailView()
         }
     }
     
@@ -117,6 +72,11 @@ struct ContentView: View {
             viewModel.moveItems(from: source, to: destination, in: watchlistItems)
         }
     }
+}
+
+#Preview {
+    ContentView()
+        .modelContainer(for: WatchlistItem.self, inMemory: true)
 }
 
 #Preview {
