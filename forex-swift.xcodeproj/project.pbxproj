@@ -6,7 +6,35 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8C64FA462E751E2B00751756 /* forex_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64FA392E751E2B00751756 /* forex_swiftTests.swift */; };
+		8C64FA472E751E2B00751756 /* WatchlistViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64FA3E2E751E2B00751756 /* WatchlistViewModelTests.swift */; };
+		8C64FA482E751E2B00751756 /* ForexServiceErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64FA3A2E751E2B00751756 /* ForexServiceErrorTests.swift */; };
+		8C64FA492E751E2B00751756 /* MockForexService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64FA3C2E751E2B00751756 /* MockForexService.swift */; };
+		8C64FA4A2E751E2B00751756 /* WatchlistItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64FA3D2E751E2B00751756 /* WatchlistItemTests.swift */; };
+		8C64FA4B2E751E2B00751756 /* ForexTypesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C64FA3B2E751E2B00751756 /* ForexTypesTests.swift */; };
+		8C64FA4E2E751EE400751756 /* Testing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C64FA4D2E751EE400751756 /* Testing.framework */; platformFilter = ios; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8C64FA342E751D9500751756 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CD514BB2E6EF8E2001C9EB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CD514C22E6EF8E2001C9EB3;
+			remoteInfo = "forex-swift";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		8C64FA302E751D9500751756 /* forex-swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "forex-swiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C64FA392E751E2B00751756 /* forex_swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = forex_swiftTests.swift; sourceTree = "<group>"; };
+		8C64FA3A2E751E2B00751756 /* ForexServiceErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForexServiceErrorTests.swift; sourceTree = "<group>"; };
+		8C64FA3B2E751E2B00751756 /* ForexTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForexTypesTests.swift; sourceTree = "<group>"; };
+		8C64FA3C2E751E2B00751756 /* MockForexService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockForexService.swift; sourceTree = "<group>"; };
+		8C64FA3D2E751E2B00751756 /* WatchlistItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistItemTests.swift; sourceTree = "<group>"; };
+		8C64FA3E2E751E2B00751756 /* WatchlistViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewModelTests.swift; sourceTree = "<group>"; };
+		8C64FA4D2E751EE400751756 /* Testing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Testing.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/Testing.framework; sourceTree = DEVELOPER_DIR; };
 		8CD514C32E6EF8E2001C9EB3 /* forex-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "forex-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -19,6 +47,14 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8C64FA2D2E751D9500751756 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C64FA4E2E751EE400751756 /* Testing.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8CD514C02E6EF8E2001C9EB3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -29,10 +65,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C64FA3F2E751E2B00751756 /* forex-swiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				8C64FA392E751E2B00751756 /* forex_swiftTests.swift */,
+				8C64FA3A2E751E2B00751756 /* ForexServiceErrorTests.swift */,
+				8C64FA3B2E751E2B00751756 /* ForexTypesTests.swift */,
+				8C64FA3C2E751E2B00751756 /* MockForexService.swift */,
+				8C64FA3D2E751E2B00751756 /* WatchlistItemTests.swift */,
+				8C64FA3E2E751E2B00751756 /* WatchlistViewModelTests.swift */,
+			);
+			path = "forex-swiftTests";
+			sourceTree = "<group>";
+		};
+		8C64FA4C2E751EE400751756 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8C64FA4D2E751EE400751756 /* Testing.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8CD514BA2E6EF8E2001C9EB3 = {
 			isa = PBXGroup;
 			children = (
+				8C64FA3F2E751E2B00751756 /* forex-swiftTests */,
 				8CD514C52E6EF8E2001C9EB3 /* forex-swift */,
+				8C64FA4C2E751EE400751756 /* Frameworks */,
 				8CD514C42E6EF8E2001C9EB3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				8CD514C32E6EF8E2001C9EB3 /* forex-swift.app */,
+				8C64FA302E751D9500751756 /* forex-swiftTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +108,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8C64FA2F2E751D9500751756 /* forex-swiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C64FA362E751D9500751756 /* Build configuration list for PBXNativeTarget "forex-swiftTests" */;
+			buildPhases = (
+				8C64FA2C2E751D9500751756 /* Sources */,
+				8C64FA2D2E751D9500751756 /* Frameworks */,
+				8C64FA2E2E751D9500751756 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C64FA352E751D9500751756 /* PBXTargetDependency */,
+			);
+			name = "forex-swiftTests";
+			packageProductDependencies = (
+			);
+			productName = "forex-swiftTests";
+			productReference = 8C64FA302E751D9500751756 /* forex-swiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8CD514C22E6EF8E2001C9EB3 /* forex-swift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8CD514D02E6EF8E3001C9EB3 /* Build configuration list for PBXNativeTarget "forex-swift" */;
@@ -80,6 +160,10 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					8C64FA2F2E751D9500751756 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = 8CD514C22E6EF8E2001C9EB3;
+					};
 					8CD514C22E6EF8E2001C9EB3 = {
 						CreatedOnToolsVersion = 26.0;
 					};
@@ -100,11 +184,19 @@
 			projectRoot = "";
 			targets = (
 				8CD514C22E6EF8E2001C9EB3 /* forex-swift */,
+				8C64FA2F2E751D9500751756 /* forex-swiftTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8C64FA2E2E751D9500751756 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8CD514C12E6EF8E2001C9EB3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +207,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8C64FA2C2E751D9500751756 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C64FA462E751E2B00751756 /* forex_swiftTests.swift in Sources */,
+				8C64FA472E751E2B00751756 /* WatchlistViewModelTests.swift in Sources */,
+				8C64FA482E751E2B00751756 /* ForexServiceErrorTests.swift in Sources */,
+				8C64FA492E751E2B00751756 /* MockForexService.swift in Sources */,
+				8C64FA4A2E751E2B00751756 /* WatchlistItemTests.swift in Sources */,
+				8C64FA4B2E751E2B00751756 /* ForexTypesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8CD514BF2E6EF8E2001C9EB3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +229,57 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8C64FA352E751D9500751756 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CD514C22E6EF8E2001C9EB3 /* forex-swift */;
+			targetProxy = 8C64FA342E751D9500751756 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		8C64FA372E751D9500751756 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V5VUQBSHV4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "transitpoc.forex-swiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/forex-swift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/forex-swift";
+			};
+			name = Debug;
+		};
+		8C64FA382E751D9500751756 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V5VUQBSHV4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "transitpoc.forex-swiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/forex-swift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/forex-swift";
+			};
+			name = Release;
+		};
 		8CD514CE2E6EF8E3001C9EB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -315,6 +470,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8C64FA362E751D9500751756 /* Build configuration list for PBXNativeTarget "forex-swiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C64FA372E751D9500751756 /* Debug */,
+				8C64FA382E751D9500751756 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8CD514BE2E6EF8E2001C9EB3 /* Build configuration list for PBXProject "forex-swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

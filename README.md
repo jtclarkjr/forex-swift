@@ -13,6 +13,7 @@ A native iOS forex watchlist app built with SwiftUI, SwiftData, and the modern `
 - **Detailed Pair View**: Comprehensive forex data including bid/ask spread and technical details
 - **Connection Status**: Visual indicators showing real-time connection status with relative timestamps
 - **Modern Architecture**: Built with MVVM pattern using `@Observable` for clean separation of concerns
+- **Comprehensive Testing**: Full unit test suite with mocking, async testing, and SwiftData validation
 
 ## Supported Currency Pairs
 
@@ -76,7 +77,14 @@ forex-swift/
 │       └── WatchlistItemRow.swift       # Individual watchlist item
 ├── Services/
 │   └── ForexService.swift        # API communication layer
-└── forex_swiftApp.swift          # App entry point with SwiftData setup
+├── forex_swiftApp.swift          # App entry point with SwiftData setup
+└── forex-swiftTests/             # Unit tests
+    ├── ForexTypesTests.swift         # Currency types and data structure tests
+    ├── WatchlistItemTests.swift      # SwiftData model tests
+    ├── ForexServiceErrorTests.swift  # Error handling and service tests
+    ├── WatchlistViewModelTests.swift # Business logic and ViewModel tests
+    ├── MockForexService.swift        # Test doubles and mocking utilities
+    └── forex_swiftTests.swift        # Basic infrastructure tests
 ```
 
 ## Architecture Highlights
@@ -122,6 +130,64 @@ forex-swift/
 - Real-time updates every 5 seconds with intelligent error handling
 - Connection status shows relative timestamps ("just now", "2m ago")
 - All currency data sourced from the one-frame Docker API service
+
+## Unit Testing
+
+The project includes comprehensive unit tests covering all major components and business logic.
+
+### Test Coverage
+
+- **ForexTypes Tests**: Currency enums, forex rate calculations, API response handling
+- **WatchlistItem Tests**: SwiftData model validation, currency property extraction
+- **ForexService Tests**: Error handling, API communication, service reliability
+- **WatchlistViewModel Tests**: Business logic, data management, real-time updates
+- **MockForexService**: Test doubles for reliable, isolated testing
+
+### Running Tests
+
+#### In Xcode (Recommended)
+1. Open the project: `open forex-swift.xcodeproj`
+2. Run all tests: `⌘ + U` (Command + U)
+3. Run specific tests: Open Test Navigator (`⌘ + 6`) and click the diamond icon next to any test
+4. View results in the Test Navigator panel
+
+#### From Command Line
+```bash
+# Run all tests
+xcodebuild test -project forex-swift.xcodeproj -scheme forex-swift -destination 'platform=iOS Simulator,name=iPhone 16'
+
+# Run specific test class
+xcodebuild test -project forex-swift.xcodeproj -scheme forex-swift -destination 'platform=iOS Simulator,name=iPhone 16' -only-testing:forex-swiftTests/ForexTypesTests
+
+# Run specific test method
+xcodebuild test -project forex-swift.xcodeproj -scheme forex-swift -destination 'platform=iOS Simulator,name=iPhone 16' -only-testing:forex-swiftTests/ForexTypesTests/testSupportedCurrencyValues
+```
+
+### Test Structure
+
+```
+forex-swiftTests/
+├── ForexTypesTests.swift         # Currency types and data structure tests
+├── WatchlistItemTests.swift      # SwiftData model tests
+├── ForexServiceErrorTests.swift  # Error handling and service tests
+├── WatchlistViewModelTests.swift # Business logic and ViewModel tests
+├── MockForexService.swift        # Test doubles and mocking utilities
+└── forex_swiftTests.swift        # Basic infrastructure tests
+```
+
+### Test Features
+
+- **Mocking**: `MockForexService` for testing without external dependencies
+- **SwiftData Testing**: In-memory model container for database tests
+- **Async Testing**: Proper handling of async/await patterns in ViewModels
+- **Error Scenarios**: Comprehensive error condition testing
+- **Concurrency**: Swift 6 concurrency-safe testing with `@MainActor`
+
+### Test Frameworks
+
+- **XCTest**: Traditional unit testing framework
+- **Swift Testing**: Modern testing framework (iOS 26+)
+- **SwiftData**: In-memory testing for model validation
 
 ## Requirements
 
