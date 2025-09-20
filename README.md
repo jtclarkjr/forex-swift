@@ -6,7 +6,7 @@ A native iOS forex watchlist app built with SwiftUI, SwiftData, and the modern `
 
 - **Real-time Forex Data**: Live streaming of currency exchange rates with updates every 5 seconds
 - **Customizable Watchlist**: Add/remove currency pairs with persistent storage using SwiftData
-- **Interactive List Management**: 
+- **Interactive List Management**:
   - Drag & drop to reorder pairs
   - Swipe to delete pairs
   - Pull to refresh for manual updates
@@ -18,7 +18,7 @@ A native iOS forex watchlist app built with SwiftUI, SwiftData, and the modern `
 ## Supported Currency Pairs
 
 - USD/JPY (US Dollar / Japanese Yen)
-- EUR/USD (Euro / US Dollar) 
+- EUR/USD (Euro / US Dollar)
 - GBP/USD (British Pound / US Dollar)
 - AUD/USD (Australian Dollar / US Dollar)
 - USD/CAD (US Dollar / Canadian Dollar)
@@ -30,7 +30,7 @@ A native iOS forex watchlist app built with SwiftUI, SwiftData, and the modern `
 ## Technical Stack
 
 - **SwiftUI**: Modern declarative UI framework
-- **SwiftData**: Persistent storage for watchlist configuration  
+- **SwiftData**: Persistent storage for watchlist configuration
 - **@Observable**: Modern observation pattern for reactive UI updates
 - **MVVM Architecture**: Clean separation of concerns with ViewModels
 - **Real-time API**: Direct integration with forex service API
@@ -42,20 +42,20 @@ Before running the application, you need to have the forex API service running:
 ### API Setup
 
 1. **Pull the Docker image:**
+
    ```bash
    docker pull paidyinc/one-frame:latest
    ```
 
 2. **Run the service:**
+
    ```bash
-   docker run -p 8080:8080 paidyinc/one-frame
+   docker run --rm -p 8080:8080 paidyinc/one-frame
    ```
 
    The API service will be available at `http://localhost:8080`.
 
    The token is mentioned on image docker hub page
- 
-
 
 ## Project Structure
 
@@ -90,17 +90,20 @@ forex-swift/
 ## Architecture Highlights
 
 ### MVVM Pattern
+
 - **Models**: SwiftData models for persistent storage
 - **ViewModels**: `@Observable` classes managing business logic and API calls
 - **Views**: SwiftUI views with reactive UI updates
 
 ### Data Flow
+
 1. **SwiftData**: Persistent storage for user's watchlist configuration
-2. **ViewModel**: Manages API calls, real-time updates, and business logic  
+2. **ViewModel**: Manages API calls, real-time updates, and business logic
 3. **API Service**: Direct communication with localhost:8080 forex API
 4. **Real-time Updates**: Timer-based polling every 5 seconds for fresh data
 
 ### Error Handling
+
 - **Typed Errors**: Custom error types with specific handling strategies
 - **Connection Management**: Visual feedback for API connectivity status
 - **Graceful Degradation**: Fallback behaviors for network issues
@@ -110,7 +113,7 @@ forex-swift/
 1. **Clone the repository**
 2. **Start the Docker forex API service** (see API Setup above)
 3. **Open the project in Xcode**
-4. **Select your target device/simulator** 
+4. **Select your target device/simulator**
 5. **Build and run** the project
 
 ## Usage
@@ -146,12 +149,14 @@ The project includes comprehensive unit tests covering all major components and 
 ### Running Tests
 
 #### In Xcode (Recommended)
+
 1. Open the project: `open forex-swift.xcodeproj`
 2. Run all tests: `⌘ + U` (Command + U)
 3. Run specific tests: Open Test Navigator (`⌘ + 6`) and click the diamond icon next to any test
 4. View results in the Test Navigator panel
 
 #### From Command Line
+
 ```bash
 # Run all tests
 xcodebuild test -project forex-swift.xcodeproj -scheme forex-swift -destination 'platform=iOS Simulator,name=iPhone 16'
