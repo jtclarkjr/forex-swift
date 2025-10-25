@@ -196,8 +196,8 @@ forex-swiftTests/
 
 ## Requirements
 
-- iOS 26.0 (Beta version)
-- Xcode 26.0 (Beta version)
+- iOS 26.0
+- Xcode 26.0
 - Docker (for running the forex API service)
 
 ## License
