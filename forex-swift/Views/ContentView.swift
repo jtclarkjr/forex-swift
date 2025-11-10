@@ -78,8 +78,3 @@ struct ContentView: View {
     ContentView()
         .modelContainer(for: WatchlistItem.self, inMemory: true)
 }
-
-#Preview {
-    ContentView()
-        .modelContainer(for: WatchlistItem.self, inMemory: true)
-}
